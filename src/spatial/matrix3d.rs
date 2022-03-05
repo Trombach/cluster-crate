@@ -1,14 +1,11 @@
-use crate::spatial::coord3d;
+mod ops;
 
+#[derive(Clone, Copy)]
 pub struct Matrix3d {
     values: [f64; 9],
 }
 
 impl Matrix3d {
-    pub fn from(values: [f64; 9]) -> Matrix3d {
-        Self { values }
-    }
-
     pub fn new(
         x0: f64,
         x1: f64,
@@ -42,40 +39,8 @@ impl Matrix3d {
     }
 }
 
-use std::ops;
-
-impl ops::Mul<coord3d::Coord3d> for Matrix3d {
-    type Output = Self;
-
-    fn mul(self, other: coord3d::Coord3d) -> Self {
-        unimplemented!()
-    }
-}
-
-impl ops::Mul<Matrix3d> for coord3d::Coord3d {
-    type Output = Self;
-
-    fn mul(self, other: Matrix3d) -> Self {
-        unimplemented!()
-    }
-}
-
-impl ops::Mul<Self> for Matrix3d {
-    type Output = Self;
-
-    fn mul(self, other: Self) -> Self {
-        let mut matrix: [f64; 9] = [0.0; 9];
-
-        for i in 0..3 {
-            for j in 0..3 {
-                let mut sum = 0.0;
-                for k in 0..3 {
-                    sum += self.get_value(i, k) * other.get_value(k, j);
-                }
-                matrix[i + 3 * j] = sum;
-            }
-        }
-
-        Self::from(matrix)
+impl From<[f64; 9]> for Matrix3d {
+    fn from(values: [f64; 9]) -> Matrix3d {
+        Self { values }
     }
 }

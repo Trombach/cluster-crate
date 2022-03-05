@@ -22,7 +22,7 @@ impl Coord3d {
     pub fn dd_norm(&self) -> Matrix3d {
         let n = 1.0 / self.norm();
         let n3 = f64::powi(n, 3);
-        let array_rep = self.array_rep();
+        let array_rep = self.as_array();
 
         let mut matrix = [0.0; 9];
 
@@ -34,5 +34,39 @@ impl Coord3d {
         }
 
         Matrix3d::from(matrix)
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use crate::spatial::coord3d::Coord3d;
+
+    #[test]
+    fn dot() {
+        assert_eq!(Coord3d::from([1.0, 2.0, 3.0]).dot(), 14.0);
+    }
+
+    #[test]
+    fn norm() {
+        let result = 14.0_f64.sqrt();
+        assert_eq!(Coord3d::from([1.0, 2.0, 3.0]).norm(), result);
+    }
+
+    #[test]
+    fn dist() {
+        let coord1 = Coord3d::from([0.0, 0.0, 0.0]);
+        let coord2 = Coord3d::from([3.0_f64.sqrt(), 3.0_f64.sqrt(), 3.0_f64.sqrt()]);
+        assert!((coord1.dist(&coord2) - 3.0).abs() <= 1e-10);
+        assert!((coord2.dist(&coord1) - 3.0).abs() <= 1e-10);
+    }
+
+    #[test]
+    fn d_norm() {
+        todo!()
+    }
+
+    #[test]
+    fn dd_norm() {
+        todo!()
     }
 }

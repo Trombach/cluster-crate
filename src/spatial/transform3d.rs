@@ -6,7 +6,7 @@ fn angle(deg: f64, rep: f64) -> f64 {
     2.0 * consts::PI * deg / rep
 }
 
-/// Computes a general roation matrix given values for
+/// Computes a general rotation matrix given values for
 ///
 /// `deg`: the degree of the rotation (e.g. 5 for a C5 rotation)
 ///

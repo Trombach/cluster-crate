@@ -61,11 +61,13 @@ mod tests {
     }
 
     #[test]
+    #[ignore]
     fn d_norm() {
         todo!()
     }
 
     #[test]
+    #[ignore]
     fn dd_norm() {
         todo!()
     }

@@ -1,3 +1,5 @@
+# Cluster Crate [![Rust](https://github.com/Trombach/cluster-crate/actions/workflows/rust.yml/badge.svg)](https://github.com/Trombach/cluster-crate/actions/workflows/rust.yml)
+
 <div align="center">
 
   <h1><code>wasm-pack-template</code></h1>

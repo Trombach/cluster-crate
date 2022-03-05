@@ -1,4 +1,4 @@
-# Cluster Crate [![Rust](https://github.com/Trombach/cluster-crate/actions/workflows/rust.yml/badge.svg)](https://github.com/Trombach/cluster-crate/actions/workflows/rust.yml)
+# Cluster Crate [![Rust](https://github.com/Trombach/cluster-crate/actions/workflows/rust.yml/badge.svg?event=push)](https://github.com/Trombach/cluster-crate/actions/workflows/rust.yml)
 
 <div align="center">
 

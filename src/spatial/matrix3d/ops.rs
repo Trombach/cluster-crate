@@ -58,3 +58,13 @@ impl ops::Mul<Coordinates> for Matrix3d {
         Coordinates::from(vec)
     }
 }
+
+impl ops::Neg for Matrix3d {
+    type Output = Matrix3d;
+
+    fn neg(self) -> Self::Output {
+        Matrix3d {
+            values: self.values.map(|element| -element),
+        }
+    }
+}

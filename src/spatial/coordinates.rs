@@ -1,7 +1,16 @@
+use std::ops::Index;
+
 use super::coord3d::Coord3d;
 
+#[derive(Debug, Clone)]
 pub struct Coordinates {
-    values: Vec<Coord3d>,
+    pub values: Vec<Coord3d>,
+}
+
+impl Coordinates {
+    pub fn add(&mut self, mut coord: Coordinates) {
+        self.values.extend(coord.values);
+    }
 }
 
 impl From<Vec<Coord3d>> for Coordinates {
@@ -10,13 +19,13 @@ impl From<Vec<Coord3d>> for Coordinates {
     }
 }
 
-// impl Iterator for Coordinates {
-//     type Item = Coord3d;
+impl Index<usize> for Coordinates {
+    type Output = Coord3d;
 
-//     fn next(&mut self) -> Option<Self::Item> {
-//         self.values.next()
-//     }
-// }
+    fn index(&self, index: usize) -> &Self::Output {
+        &self.values[index]
+    }
+}
 
 impl IntoIterator for Coordinates {
     type Item = Coord3d;

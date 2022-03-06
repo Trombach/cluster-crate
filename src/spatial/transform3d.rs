@@ -2,20 +2,22 @@ use crate::spatial::coord3d;
 use crate::spatial::matrix3d;
 use std::f64::consts;
 
-/**
-Computes a general rotation matrix given values for
-
-`DEG`: the degree of the rotation (e.g. 5 for a C5 rotation)
-
-`REP`: how many times the rotation should be applied
-
-`axis`: the rotational axis
-
-# Example
-```
-let rot_mat = rot_mat::<5, 1>(&rot_axis_normed);
-```
-*/
+/// Computes a general rotation matrix given values for
+///
+/// `DEG`: the degree of the rotation (e.g. 5 for a C5 rotation)
+///
+/// `REP`: how many times the rotation should be applied
+///
+/// `axis`: the rotational axis
+///
+/// # Example
+/// ```
+/// use cluster_crate::spatial::coord3d;
+/// use cluster_crate::spatial::transform3d;
+///
+/// let rot_axis_normed = coord3d::Coord3d::from([1.0, 1.0, 1.0]);
+/// let rot_mat = transform3d::rot_mat::<5, 1>(&rot_axis_normed);
+/// ```
 pub fn rot_mat<const DEG: u8, const REP: u8>(axis: &coord3d::Coord3d) -> matrix3d::Matrix3d {
     assert!(DEG > REP, "deg is required to be greater than rep");
 
@@ -36,20 +38,22 @@ pub fn rot_mat<const DEG: u8, const REP: u8>(axis: &coord3d::Coord3d) -> matrix3
     matrix3d::Matrix3d::from(matrix)
 }
 
-/**
-Computes an improper rotation matrix given values for
-
-`DEG`: the degree of the rotation (e.g. 5 for a C5 rotation)
-
-`REP`: how many times the rotation should be applied
-
-`axis`: the rotational axis
-
-# Example
-```
-let rot_mat = improper_rot_mat::<5, 1>(&rot_axis_normed);
-```
-*/
+/// Computes an improper rotation matrix given values for
+///
+/// `DEG`: the degree of the rotation (e.g. 5 for a C5 rotation)
+///
+/// `REP`: how many times the rotation should be applied
+///
+/// `axis`: the rotational axis
+///
+/// # Example
+/// ```
+/// use cluster_crate::spatial::coord3d;
+/// use cluster_crate::spatial::transform3d;
+///
+/// let rot_axis_normed = coord3d::Coord3d::from([1.0, 1.0, 1.0]);
+/// let rot_mat = transform3d::improper_rot_mat::<5, 1>(&rot_axis_normed);
+/// ```
 pub fn improper_rot_mat<const DEG: u8, const REP: u8>(
     axis: &coord3d::Coord3d,
 ) -> matrix3d::Matrix3d {
@@ -68,6 +72,14 @@ pub fn improper_rot_mat<const DEG: u8, const REP: u8>(
     ]) * rot_mat::<DEG, REP>(axis)
 }
 
+/// Computes and inversion matrix
+///
+/// # Example
+/// ```
+/// use cluster_crate::spatial::transform3d;
+///
+/// let inversion = transform3d::inversion();
+/// ```
 pub fn inversion() -> matrix3d::Matrix3d {
     -matrix3d::Matrix3d::new_unit_matrix()
 }

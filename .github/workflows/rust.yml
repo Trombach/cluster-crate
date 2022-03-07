@@ -29,6 +29,7 @@ jobs:
   unit_tests:  
     runs-on: ubuntu-latest
     needs: [build]
+    if: ${{ success() }}
     steps:
       - uses: actions/checkout@v3
       - name: Download build artifacts
@@ -41,6 +42,7 @@ jobs:
   web_tests:
     runs-on: ubuntu-latest
     needs: [build]
+    if: ${{ success() }}
     steps:
       - uses: actions/checkout@v3
       - name: Download build artifacts

@@ -28,7 +28,7 @@ use std::fmt;
 
 impl fmt::Display for Coord3d {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
-        writeln!(f, "{{{},{},{}}}", self.x, self.y, self.z)
+        writeln!(f, "{{{:.8},{:.8},{:.8}}}", self.x, self.y, self.z)
     }
 }
 

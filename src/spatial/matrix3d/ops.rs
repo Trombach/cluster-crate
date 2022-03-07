@@ -7,14 +7,16 @@ impl ops::Mul<Coord3d> for Matrix3d {
 
     fn mul(self, rhs: Coord3d) -> Coord3d {
         let rhs = rhs.as_array();
-        let mut arr: [f64; 3] = [0.0; 3];
+        let mut coord3d = Coord3d::from([0.0; 3]);
         for i in 0..3 {
-            for j in 0..3 {
-                arr[i] = self.values[i + 3 * j] * rhs[i];
-            }
+            coord3d += Coord3d::from([
+                self.values[i] * rhs[i],
+                self.values[3 + i] * rhs[i],
+                self.values[6 + i] * rhs[i],
+            ]);
         }
 
-        Coord3d::from(arr)
+        coord3d
     }
 }
 

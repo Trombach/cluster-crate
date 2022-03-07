@@ -5,10 +5,10 @@ use crate::{
 };
 use std::f64::consts::PI;
 
-pub fn new(n_layers: &u16) -> Cluster {
+pub fn new(n_layers: u16) -> Cluster {
     Cluster {
-        coords: generate_coords(n_layers),
-        kind: Polyhedron::Tetrahedron,
+        coords: generate_coords(&n_layers),
+        kind: Polyhedron::Icosahedron,
     }
 }
 
@@ -31,7 +31,6 @@ fn generate_coords(n_layers: &u16) -> Coordinates {
         transform3d::rot_mat::<5, 2>(&rot_axis_normed),
         transform3d::rot_mat::<5, 3>(&rot_axis_normed),
         transform3d::rot_mat::<5, 4>(&rot_axis_normed),
-        transform3d::rot_mat::<5, 5>(&rot_axis_normed),
     ];
 
     for i in c5 {

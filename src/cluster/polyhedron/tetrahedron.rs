@@ -4,7 +4,7 @@ use crate::{
     spatial::{coordinates::Coordinates, matrix3d::Matrix3d},
 };
 
-pub fn new(n_layers: &u16) -> Cluster {
+pub fn new(n_layers: u16) -> Cluster {
     Cluster {
         coords: generate_coords(&n_layers),
         kind: Polyhedron::Tetrahedron,
@@ -12,7 +12,7 @@ pub fn new(n_layers: &u16) -> Cluster {
 }
 
 fn generate_coords(n_layers: &u16) -> Coordinates {
-    trans_matrix() * non_cart_coord(n_layers)
+    trans_matrix() * non_cart_coord(n_layers) * 2.8
 }
 
 fn trans_matrix() -> Matrix3d {

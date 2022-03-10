@@ -1,4 +1,5 @@
 pub mod polyhedron;
+mod utils;
 
 use self::polyhedron::Polyhedron;
 use crate::spatial::coordinates::Coordinates;
@@ -13,6 +14,7 @@ impl Cluster {
     pub fn new(polyhedron: Polyhedron, n_layers: u16) -> Self {
         match polyhedron {
             Polyhedron::Tetrahedron => self::polyhedron::tetrahedron::new(n_layers),
+            Polyhedron::Pyramid => self::polyhedron::pyramid::new(n_layers),
             Polyhedron::Icosahedron => self::polyhedron::icosahedron::new(n_layers),
         }
     }

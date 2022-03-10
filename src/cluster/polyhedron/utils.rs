@@ -24,10 +24,6 @@ pub fn non_cart_coord(n_layers: &u16) -> Coordinates {
     Coordinates::from(vector)
 }
 
-pub fn remove_duplicates() {
-    todo!()
-}
-
 #[cfg(test)]
 mod tests {
     use crate::{

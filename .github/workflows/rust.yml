@@ -7,7 +7,8 @@ on:
   pull_request:
     branches: [ master ]
     paths: [ '**.rs', '.github/workflows/rust.yml' ]
-  workflow_dispatch:   
+  workflow_dispatch:
+  workflow_call:
     
 env:
   CARGO_TERM_COLOR: always

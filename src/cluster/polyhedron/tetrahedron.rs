@@ -5,7 +5,7 @@ use crate::{
 };
 
 pub fn new(n_layers: u16) -> Cluster {
-    Cluster::new(generate_coords(&n_layers))
+    Cluster::from(generate_coords(&n_layers))
 }
 
 fn generate_coords(n_layers: &u16) -> Coordinates {

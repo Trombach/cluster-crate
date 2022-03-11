@@ -1,5 +1,5 @@
 use super::Coord3d;
-use std::ops;
+use std::ops::{self, Index, IndexMut};
 
 impl ops::AddAssign<Coord3d> for Coord3d {
     fn add_assign(&mut self, rhs: Self) {
@@ -73,9 +73,21 @@ impl ops::Neg for Coord3d {
     type Output = Self;
 
     fn neg(self) -> Self {
-        Self {
-            x: [-self[0], -self[1], -self[2]],
-        }
+        Self([-self[0], -self[1], -self[2]])
+    }
+}
+
+impl Index<usize> for Coord3d {
+    type Output = f64;
+
+    fn index(&self, index: usize) -> &Self::Output {
+        &self.0[index]
+    }
+}
+
+impl IndexMut<usize> for Coord3d {
+    fn index_mut(&mut self, index: usize) -> &mut Self::Output {
+        &mut self.0[index]
     }
 }
 

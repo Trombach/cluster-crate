@@ -8,9 +8,9 @@ impl ops::Mul<[f64; 3]> for Matrix3d {
     fn mul(self, rhs: [f64; 3]) -> Self::Output {
         let mut vec = [0.0; 3];
         for i in 0..3 {
-            vec[0] += self.values[i] * rhs[i];
-            vec[1] += self.values[3 + i] * rhs[i];
-            vec[2] += self.values[6 + 1] * rhs[i];
+            vec[0] += self.0[i] * rhs[i];
+            vec[1] += self.0[3 + i] * rhs[i];
+            vec[2] += self.0[6 + 1] * rhs[i];
         }
 
         vec
@@ -71,8 +71,6 @@ impl ops::Neg for Matrix3d {
     type Output = Matrix3d;
 
     fn neg(self) -> Self::Output {
-        Matrix3d {
-            values: self.values.map(|element| -element),
-        }
+        Matrix3d(self.0.map(|element| -element))
     }
 }

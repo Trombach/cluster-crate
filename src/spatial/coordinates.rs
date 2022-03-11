@@ -4,12 +4,16 @@ mod ops;
 pub struct Coordinates(Vec<Coord3d>);
 
 impl Coordinates {
-    pub fn new(coord: Vec<Coord3d>) -> Self {
-        Self(coord)
+    pub fn new() -> Self {
+        Self(Vec::<Coord3d>::new())
     }
 
     pub fn add(&mut self, coord: Coordinates) {
         self.0.extend(coord.0);
+    }
+
+    pub fn add_coord3d(&mut self, coord3d: Coord3d) {
+        self.0.push(coord3d);
     }
 
     pub fn size(&self) -> usize {
@@ -17,8 +21,14 @@ impl Coordinates {
     }
 }
 
+impl From<Coord3d> for Coordinates {
+    fn from(coord: Coord3d) -> Self {
+        Coordinates { 0: vec![coord] }
+    }
+}
+
 impl From<Vec<Coord3d>> for Coordinates {
-    fn from(vec: Vec<Coord3d>) -> Coordinates {
+    fn from(vec: Vec<Coord3d>) -> Self {
         Coordinates { 0: vec }
     }
 }
@@ -44,5 +54,27 @@ impl Display for Coordinates {
         }
 
         Ok(())
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::Coordinates;
+    use crate::spatial::Coord3d;
+
+    #[test]
+    fn create_coordinates() {
+        let result = Coordinates {
+            0: Vec::<Coord3d>::new(),
+        };
+        assert_eq!(Coordinates::new(), result);
+
+        let result = Coordinates {
+            0: vec![Coord3d::from([1.0, 2.0, 3.0])],
+        };
+        assert_eq!(
+            Coordinates::from(vec![Coord3d::from([1.0, 2.0, 3.0])]),
+            result
+        )
     }
 }

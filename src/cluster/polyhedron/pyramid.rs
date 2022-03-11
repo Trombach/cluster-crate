@@ -3,7 +3,7 @@ use crate::spatial::{Coordinates, Matrix3d};
 use std::f64::consts::PI;
 
 pub fn new(n_layers: u16) -> Cluster {
-    Cluster::new(generate_coords(&n_layers))
+    Cluster::from(generate_coords(&n_layers))
 }
 
 fn generate_coords(n_layers: &u16) -> Coordinates {

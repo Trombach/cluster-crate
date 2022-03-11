@@ -29,7 +29,7 @@ mod tests {
 
     #[test]
     fn non_cart_coord() {
-        let result = Coordinates::new(vec![
+        let result = Coordinates::from(vec![
             Coord3d::from([0.0, 0.0, 0.0]),
             Coord3d::from([0.0, 0.0, 1.0]),
             Coord3d::from([0.0, 0.0, 2.0]),

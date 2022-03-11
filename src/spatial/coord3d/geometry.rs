@@ -1,9 +1,9 @@
 use super::Coord3d;
-use crate::spatial::matrix3d::Matrix3d;
+use crate::spatial::Matrix3d;
 
 impl Coord3d {
     pub fn dot(&self) -> f64 {
-        f64::powi(self.x, 2) + f64::powi(self.y, 2) + f64::powi(self.z, 2)
+        f64::powi(self[0], 2) + f64::powi(self[1], 2) + f64::powi(self[2], 2)
     }
 
     pub fn norm(&self) -> f64 {
@@ -39,7 +39,7 @@ impl Coord3d {
 
 #[cfg(test)]
 mod tests {
-    use crate::spatial::coord3d::Coord3d;
+    use crate::spatial::Coord3d;
 
     #[test]
     fn dot() {

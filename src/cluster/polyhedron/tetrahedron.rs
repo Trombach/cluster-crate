@@ -1,14 +1,11 @@
-use super::{utils::non_cart_coord, Polyhedron};
+use super::utils::non_cart_coord;
 use crate::{
     cluster::Cluster,
     spatial::{coordinates::Coordinates, matrix3d::Matrix3d},
 };
 
 pub fn new(n_layers: u16) -> Cluster {
-    Cluster {
-        coords: generate_coords(&n_layers),
-        kind: Polyhedron::Tetrahedron,
-    }
+    Cluster::new(generate_coords(&n_layers))
 }
 
 fn generate_coords(n_layers: &u16) -> Coordinates {

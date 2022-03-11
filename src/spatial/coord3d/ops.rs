@@ -3,9 +3,9 @@ use std::ops;
 
 impl ops::AddAssign<Coord3d> for Coord3d {
     fn add_assign(&mut self, rhs: Self) {
-        self.x += rhs.x;
-        self.y += rhs.y;
-        self.z += rhs.z;
+        self[0] += rhs[0];
+        self[1] += rhs[1];
+        self[2] += rhs[2];
     }
 }
 
@@ -20,9 +20,9 @@ impl ops::Add<Coord3d> for Coord3d {
 
 impl ops::SubAssign<Coord3d> for Coord3d {
     fn sub_assign(&mut self, rhs: Self) {
-        self.x -= rhs.x;
-        self.y -= rhs.y;
-        self.z -= rhs.z;
+        self[0] -= rhs[0];
+        self[1] -= rhs[1];
+        self[2] -= rhs[2];
     }
 }
 
@@ -37,9 +37,9 @@ impl ops::Sub<Coord3d> for Coord3d {
 
 impl ops::MulAssign<f64> for Coord3d {
     fn mul_assign(&mut self, rhs: f64) {
-        self.x *= rhs;
-        self.y *= rhs;
-        self.z *= rhs;
+        self[0] *= rhs;
+        self[1] *= rhs;
+        self[2] *= rhs;
     }
 }
 
@@ -54,9 +54,9 @@ impl ops::Mul<f64> for Coord3d {
 
 impl ops::DivAssign<f64> for Coord3d {
     fn div_assign(&mut self, rhs: f64) {
-        self.x /= rhs;
-        self.y /= rhs;
-        self.z /= rhs;
+        self[0] /= rhs;
+        self[1] /= rhs;
+        self[2] /= rhs;
     }
 }
 
@@ -74,9 +74,7 @@ impl ops::Neg for Coord3d {
 
     fn neg(self) -> Self {
         Self {
-            x: -self.x,
-            y: -self.y,
-            z: -self.z,
+            x: [-self[0], -self[1], -self[2]],
         }
     }
 }

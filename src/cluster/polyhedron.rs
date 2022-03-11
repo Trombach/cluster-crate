@@ -5,9 +5,9 @@ mod utils;
 
 #[derive(Debug)]
 pub enum Polyhedron {
-    Tetrahedron,
-    Pyramid,
-    Icosahedron,
+    Tetrahedron(u16),
+    Pyramid(u16),
+    Icosahedron(u16),
 }
 
 use std::fmt::Display;
@@ -15,9 +15,9 @@ use std::fmt::Display;
 impl Display for Polyhedron {
     fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
         match *self {
-            Self::Tetrahedron => write!(f, "Tetrahedron"),
-            Self::Pyramid => write!(f, "Pyramid"),
-            Self::Icosahedron => write!(f, "Icosahedron"),
+            Self::Tetrahedron(i) => write!(f, "Tetrahedron, {} layers", i),
+            Self::Pyramid(i) => write!(f, "Pyramid, {} layers", i),
+            Self::Icosahedron(i) => write!(f, "Icosahedron, {} layers", i),
         }
     }
 }

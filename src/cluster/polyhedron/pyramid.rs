@@ -1,14 +1,9 @@
+use crate::cluster::Cluster;
+use crate::spatial::{Coordinates, Matrix3d};
 use std::f64::consts::PI;
 
-use super::Polyhedron;
-use crate::spatial::matrix3d::Matrix3d;
-use crate::{cluster::Cluster, spatial::coordinates::Coordinates};
-
 pub fn new(n_layers: u16) -> Cluster {
-    Cluster {
-        coords: generate_coords(&n_layers),
-        kind: Polyhedron::Pyramid,
-    }
+    Cluster::new(generate_coords(&n_layers))
 }
 
 fn generate_coords(n_layers: &u16) -> Coordinates {

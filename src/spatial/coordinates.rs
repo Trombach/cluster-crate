@@ -1,39 +1,25 @@
-use std::ops::{self, Index};
-
-use super::coord3d::Coord3d;
+mod ops;
 
 #[derive(Debug, Clone, PartialEq)]
-pub struct Coordinates {
-    pub values: Vec<Coord3d>,
-}
+pub struct Coordinates(Vec<Coord3d>);
 
 impl Coordinates {
-    pub fn add(&mut self, coord: Coordinates) {
-        self.values.extend(coord.values);
+    pub fn new(coord: Vec<Coord3d>) -> Self {
+        Self(coord)
     }
-}
 
-impl ops::Mul<f64> for Coordinates {
-    type Output = Coordinates;
+    pub fn add(&mut self, coord: Coordinates) {
+        self.0.extend(coord.0);
+    }
 
-    fn mul(self, rhs: f64) -> Self::Output {
-        Self::Output {
-            values: self.values.into_iter().map(|coord| coord * rhs).collect(),
-        }
+    pub fn size(&self) -> usize {
+        self.0.len()
     }
 }
 
 impl From<Vec<Coord3d>> for Coordinates {
     fn from(vec: Vec<Coord3d>) -> Coordinates {
-        Coordinates { values: vec }
-    }
-}
-
-impl Index<usize> for Coordinates {
-    type Output = Coord3d;
-
-    fn index(&self, index: usize) -> &Self::Output {
-        &self.values[index]
+        Coordinates { 0: vec }
     }
 }
 
@@ -43,15 +29,17 @@ impl IntoIterator for Coordinates {
     type IntoIter = std::vec::IntoIter<Self::Item>;
 
     fn into_iter(self) -> Self::IntoIter {
-        self.values.into_iter()
+        self.0.into_iter()
     }
 }
 
 use std::fmt::Display;
 
+use super::coord3d::Coord3d;
+
 impl Display for Coordinates {
     fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
-        for coord in &self.values {
+        for coord in &self.0 {
             write!(f, "{}", coord)?;
         }
 

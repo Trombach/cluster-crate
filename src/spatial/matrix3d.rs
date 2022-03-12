@@ -1,6 +1,6 @@
 mod ops;
 
-#[derive(Clone, Copy)]
+#[derive(Clone, Copy, Debug)]
 pub struct Matrix3d([f64; 9]);
 
 impl Matrix3d {

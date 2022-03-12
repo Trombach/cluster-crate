@@ -2,27 +2,21 @@ use super::Matrix3d;
 use crate::spatial::{coord3d::Coord3d, coordinates::Coordinates};
 use std::ops;
 
-impl ops::Mul<[f64; 3]> for Matrix3d {
-    type Output = [f64; 3];
-
-    fn mul(self, rhs: [f64; 3]) -> Self::Output {
-        let mut vec = [0.0; 3];
-        for i in 0..3 {
-            vec[0] += self.0[i] * rhs[i];
-            vec[1] += self.0[3 + i] * rhs[i];
-            vec[2] += self.0[6 + 1] * rhs[i];
-        }
-
-        vec
-    }
-}
-
 impl ops::Mul<Coord3d> for Matrix3d {
     type Output = Coord3d;
 
     fn mul(self, rhs: Coord3d) -> Self::Output {
         let rhs = rhs.as_array();
-        Coord3d::from(self * rhs)
+        let mut coord3d = Coord3d::from([0.0; 3]);
+        for i in 0..3 {
+            coord3d += Coord3d::from([
+                self.0[i] * rhs[i],
+                self.0[3 + i] * rhs[i],
+                self.0[6 + 1] * rhs[i],
+            ])
+        }
+
+        coord3d
     }
 }
 

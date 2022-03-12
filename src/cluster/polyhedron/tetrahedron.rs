@@ -1,15 +1,11 @@
 use super::utils;
-use crate::{
-    cluster::Cluster,
-    spatial::{coordinates::Coordinates, matrix3d::Matrix3d},
-};
+use crate::{cluster::Cluster, spatial::matrix3d::Matrix3d};
 
-pub fn new(n_layers: u16) -> Cluster {
-    Cluster::from(generate_coords(n_layers))
-}
-
-fn generate_coords(n_layers: u16) -> Coordinates {
-    trans_matrix() * utils::non_cart_coord(n_layers) * 2.8
+pub fn new(n_layers: u16, scaling: Option<f64>) -> Cluster {
+    match scaling {
+        Some(i) => Cluster::from(trans_matrix() * utils::non_cart_coord(n_layers) * i),
+        None => Cluster::from(trans_matrix() * utils::non_cart_coord(n_layers) * 2.8),
+    }
 }
 
 fn trans_matrix() -> Matrix3d {

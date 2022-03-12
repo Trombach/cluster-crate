@@ -1,6 +1,6 @@
 use crate::cluster::Cluster;
 
-pub fn new(_n_layers: u16) -> Cluster {
+pub fn new(_n_layers: u16, _scaling: Option<f64>) -> Cluster {
     todo!();
     // Cluster {
     //     coords: generate_coords(&n_layers),

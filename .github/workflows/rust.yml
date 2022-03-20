@@ -2,10 +2,10 @@ name: Rust Tests
 
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
     paths: [ '**.rs', '.github/workflows/rust.yml' ]
   pull_request:
-    branches: [ master ]
+    branches: [ main ]
     paths: [ '**.rs', '.github/workflows/rust.yml' ]
   workflow_dispatch:
   workflow_call:

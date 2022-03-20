@@ -23,9 +23,15 @@ impl Cluster {
 impl From<Polyhedron> for Cluster {
     fn from(polyhedron: Polyhedron) -> Self {
         match polyhedron {
-            Polyhedron::Tetrahedron(i) => self::polyhedron::tetrahedron::new(i),
-            Polyhedron::Pyramid(i) => self::polyhedron::pyramid::new(i),
-            Polyhedron::Icosahedron(i) => self::polyhedron::icosahedron::new(i),
+            Polyhedron::Tetrahedron(n_layers, scaling) => {
+                self::polyhedron::tetrahedron::new(n_layers, scaling)
+            }
+            Polyhedron::Pyramid(n_layers, scaling) => {
+                self::polyhedron::pyramid::new(n_layers, scaling)
+            }
+            Polyhedron::Icosahedron(n_layers, scaling) => {
+                self::polyhedron::icosahedron::new(n_layers, scaling)
+            }
         }
     }
 }
@@ -100,7 +106,8 @@ mod tests {
             ]),
         };
 
-        assert_eq!(Cluster::from(Polyhedron::Pyramid(4)), result)
+        // The test coordinates require 4 layers and a scaling of 5.0
+        assert_eq!(Cluster::from(Polyhedron::Pyramid(4, Some(5.0))), result)
     }
 
     #[test]
@@ -130,6 +137,7 @@ mod tests {
             ]),
         };
 
-        assert_eq!(Cluster::from(Polyhedron::Tetrahedron(4)), result)
+        // The test coordinates require 4 layers and the default scaling of 2.8
+        assert_eq!(Cluster::from(Polyhedron::Tetrahedron(4, None)), result)
     }
 }

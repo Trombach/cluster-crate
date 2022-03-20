@@ -1,13 +1,10 @@
+use super::utils;
 use crate::cluster::Cluster;
-use crate::spatial::{Coordinates, Matrix3d};
+use crate::spatial::Matrix3d;
 use std::f64::consts::PI;
 
-pub fn new(n_layers: u16) -> Cluster {
-    Cluster::from(generate_coords(n_layers))
-}
-
-fn generate_coords(n_layers: u16) -> Coordinates {
-    trans_matrix() * super::utils::non_cart_coord(n_layers) * 5.0
+pub fn new(n_layers: u16, scaling: Option<f64>) -> Cluster {
+    Cluster::from(trans_matrix() * utils::non_cart_coord(n_layers) * scaling.unwrap_or(2.8))
 }
 
 fn trans_matrix() -> Matrix3d {

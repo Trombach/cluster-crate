@@ -4,10 +4,7 @@ use crate::spatial::Matrix3d;
 use std::f64::consts::PI;
 
 pub fn new(n_layers: u16, scaling: Option<f64>) -> Cluster {
-    match scaling {
-        Some(i) => Cluster::from(trans_matrix() * utils::non_cart_coord(n_layers) * i),
-        None => Cluster::from(trans_matrix() * utils::non_cart_coord(n_layers) * 2.8),
-    }
+    Cluster::from(trans_matrix() * utils::non_cart_coord(n_layers) * scaling.unwrap_or(2.8))
 }
 
 fn trans_matrix() -> Matrix3d {

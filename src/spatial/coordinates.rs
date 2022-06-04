@@ -19,6 +19,16 @@ impl Coordinates {
     pub fn size(&self) -> usize {
         self.0.len()
     }
+
+    pub fn norm(&self) -> Self {
+        Self {
+            0: self.0.iter().map(|coord| coord.d_norm()).collect(),
+        }
+    }
+
+    pub fn iter_floats(&self) -> impl Iterator<Item = f64> + '_ {
+        self.0.iter().flat_map(|c3| c3.as_array())
+    }
 }
 
 impl From<Coord3d> for Coordinates {

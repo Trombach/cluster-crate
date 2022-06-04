@@ -11,12 +11,16 @@ impl Coord3d {
     }
 
     pub fn dist(&self, other: &Self) -> f64 {
-        (self.clone() - other.clone()).norm()
+        (*self - *other).norm()
     }
 
     // d/dx_i ||x|| = x_i/||x||
     pub fn d_norm(&self) -> Self {
-        self.clone() / self.clone().norm()
+        if self.norm() <= 1e-10 {
+            *self
+        } else {
+            *self / self.norm()
+        }
     }
 
     pub fn dd_norm(&self) -> Matrix3d {

@@ -1,24 +1,26 @@
+pub mod implementations;
+
 use crate::{cluster::Coordinates, spatial::Coord3d};
 
 trait PairPotential {
-    fn e(distance: f64) -> f64;
-    fn energy(coords: &Coordinates) -> f64 {
+    fn e(&self, distance: f64) -> f64;
+    fn energy(&self, coords: &Coordinates) -> f64 {
         let mut e: f64 = 0.0;
         for x1 in coords {
             for x2 in coords {
-                e += Self::e(x1.dist(&x2));
+                e += self.e(x1.dist(&x2));
             }
         }
 
         e
     }
-    fn de_dr(distance: f64) -> f64;
-    fn gradient(coords: &Coordinates) -> Vec<Coord3d> {
+    fn de_dr(&self, distance: f64) -> f64;
+    fn gradient(&self, coords: &Coordinates) -> Vec<Coord3d> {
         let mut gradient = vec![Coord3d::from([0.0, 0.0, 0.0]); coords.len()];
         for (i, x1) in coords.iter().enumerate() {
             for (j, x2) in coords.iter().enumerate() {
                 let d = *x1 - *x2;
-                let g = Self::de_dr(d.norm());
+                let g = self.de_dr(d.norm());
                 let gradient_value = d / d.norm() * g;
                 gradient[i] += gradient_value;
                 gradient[j] -= gradient_value;
@@ -27,8 +29,8 @@ trait PairPotential {
 
         gradient
     }
-    fn d2e_dr2(distance: f64) -> f64;
-    fn hessian(coords: &Coordinates) -> Vec<Vec<f64>> {
+    fn d2e_dr2(&self, distance: f64) -> f64;
+    fn hessian(&self, coords: &Coordinates) -> Vec<Vec<f64>> {
         let mut hessian = vec![vec![0f64; 3 * coords.len()]; 3 * coords.len()];
         for (i, x1) in coords.iter().enumerate() {
             for (j, x2) in coords.iter().enumerate() {
@@ -36,8 +38,8 @@ trait PairPotential {
                 let r = d.norm();
 
                 // first and second derivative values
-                let de_dr = Self::de_dr(r);
-                let d2e_dr2 = Self::d2e_dr2(r);
+                let de_dr = self.de_dr(r);
+                let d2e_dr2 = self.d2e_dr2(r);
 
                 // derivatives of r
                 let dvecr_dr = d.d_norm();

@@ -1,5 +1,5 @@
 use super::Matrix3d;
-use crate::spatial::{coord3d::Coord3d, coordinates::Coordinates};
+use crate::{cluster::Coordinates, spatial::coord3d::Coord3d};
 use std::ops;
 
 impl ops::Mul<Coord3d> for Matrix3d {

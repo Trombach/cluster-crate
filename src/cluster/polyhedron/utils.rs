@@ -1,4 +1,4 @@
-use crate::spatial::{coord3d::Coord3d, coordinates::Coordinates};
+use crate::{cluster::Coordinates, spatial::coord3d::Coord3d};
 
 pub fn non_cart_coord(n_layers: u16) -> Coordinates {
     let mut vector = Vec::<Coord3d>::new();
@@ -17,19 +17,16 @@ pub fn non_cart_coord(n_layers: u16) -> Coordinates {
         k += 1;
     }
 
-    Coordinates::from(vector)
+    vector
 }
 
 #[cfg(test)]
 mod tests {
-    use crate::{
-        cluster::polyhedron::utils,
-        spatial::{coord3d::Coord3d, coordinates::Coordinates},
-    };
+    use crate::{cluster::polyhedron::utils, spatial::coord3d::Coord3d};
 
     #[test]
     fn non_cart_coord() {
-        let result = Coordinates::from(vec![
+        let result = vec![
             Coord3d::from([0.0, 0.0, 0.0]),
             Coord3d::from([0.0, 0.0, 1.0]),
             Coord3d::from([0.0, 0.0, 2.0]),
@@ -40,7 +37,7 @@ mod tests {
             Coord3d::from([1.0, 0.0, 1.0]),
             Coord3d::from([1.0, 1.0, 0.0]),
             Coord3d::from([2.0, 0.0, 0.0]),
-        ]);
+        ];
         assert_eq!(utils::non_cart_coord(3), result)
     }
 }

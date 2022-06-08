@@ -5,14 +5,26 @@ mod ops;
 pub struct Coord3d([f64; 3]);
 
 impl Coord3d {
-    pub fn as_array(&self) -> [f64; 3] {
-        self.0
+    pub fn new(x: f64, y: f64, z: f64) -> Self {
+        Self { 0: [x, y, z] }
     }
 }
 
 impl From<[f64; 3]> for Coord3d {
     fn from(array: [f64; 3]) -> Self {
         Coord3d(array)
+    }
+}
+
+impl Into<[f64; 3]> for Coord3d {
+    fn into(self) -> [f64; 3] {
+        self.0
+    }
+}
+
+impl Into<[f64; 3]> for &Coord3d {
+    fn into(self) -> [f64; 3] {
+        self.0
     }
 }
 
@@ -31,8 +43,9 @@ mod tests {
     #[test]
     fn as_array() {
         let result = [2.0, 3.0, 1.0];
+        let coord: [f64; 3] = Coord3d::new(2.0, 3.0, 1.0).into();
 
-        assert_eq!(Coord3d { 0: [2.0, 3.0, 1.0] }.as_array(), result);
+        assert_eq!(coord, result);
     }
 
     #[test]

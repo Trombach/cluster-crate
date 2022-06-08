@@ -6,7 +6,7 @@ impl ops::Mul<Coord3d> for Matrix3d {
     type Output = Coord3d;
 
     fn mul(self, rhs: Coord3d) -> Self::Output {
-        let rhs = rhs.as_array();
+        let rhs: [f64; 3] = rhs.into();
         let mut coord3d = Coord3d::from([0.0; 3]);
         for i in 0..3 {
             coord3d += Coord3d::from([

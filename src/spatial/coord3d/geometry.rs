@@ -26,7 +26,7 @@ impl Coord3d {
     pub fn dd_norm(&self) -> Matrix3d {
         let n = 1.0 / self.norm();
         let n3 = f64::powi(n, 3);
-        let array_rep = self.as_array();
+        let array_rep: [f64; 3] = self.into();
 
         let mut matrix = [0.0; 9];
 

@@ -40,3 +40,15 @@ impl From<[f64; 9]> for Matrix3d {
         Self(values)
     }
 }
+
+impl Into<[f64; 9]> for Matrix3d {
+    fn into(self) -> [f64; 9] {
+        self.0
+    }
+}
+
+impl Into<[f64; 9]> for &Matrix3d {
+    fn into(self) -> [f64; 9] {
+        self.0
+    }
+}
